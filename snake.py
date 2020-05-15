@@ -123,11 +123,14 @@ class Game:
             self.update()
         if self.isHeadOnTail():
             self.drawField()
-        print("GAME OVER")
-        print( "SCORE: ", self.score)
 
-        self.screen.blit(self.generateTextSurface( 'GAME OVER' , 60 ) ,(550,200))
-        self.screen.blit(self.generateTextSurface( 'SCORE: ' + str(self.score) , 60 ) ,(550,340))
+        game_over_surface = self.generateTextSurface( 'GAME OVER' , 60 ) 
+        score_surface = self.generateTextSurface( 'SCORE: ' + str(self.score) , 60 )
+        game_over_position = ((self.field_width - game_over_surface.get_width() ) / 2, (self.field_height - 2*game_over_surface.get_height() ) / 2 )
+        score_position = ((self.field_width - score_surface.get_width() ) / 2, self.field_height / 2 )
+
+        self.screen.blit(game_over_surface , game_over_position )
+        self.screen.blit(score_surface, score_position )
         pygame.display.update()
 
         while(True):
