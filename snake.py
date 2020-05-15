@@ -39,8 +39,8 @@ class Game:
     def loadResourses(self):
         self.background_image = pygame.image.load( 'background.png' ).convert()
         self.snake_image = pygame.image.load( 'simplesnake.png' ).convert()
-        self.fruit_image = pygame.image.load( 'simplefruit1.png' ).convert()
-        self.tail_image = pygame.image.load ( 'simplefruit.png' ).convert()
+        self.fruit_image = pygame.image.load( 'simplefruit.png' ).convert()
+        self.tail_image = pygame.image.load ( 'simpletail.png' ).convert()
 
     def onPress(self, key):
         try:
@@ -119,7 +119,7 @@ class Game:
                 if event.type == QUIT:
                     sys.exit()
             self.drawField()
-            time.sleep(0.1)
+            time.sleep(0.05)
             self.update()
         if self.isHeadOnTail():
             self.drawField()
