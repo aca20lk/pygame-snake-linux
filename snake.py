@@ -79,6 +79,7 @@ class Game:
                     self.screen.blit( self.tail_image, (30 + 20*grid_x, 30 + 20*grid_y))
                 elif grid_y == self.fruit_y and grid_x == self.fruit_x:
                     self.screen.blit( self.fruit_image, (30 + 20*grid_x, 30 + 20*grid_y))
+        self.screen.blit(self.generateTextSurface( 'SCORE: ' + str(self.score) , 30 ) ,(30,5))
         pygame.display.update()
 
 
@@ -94,6 +95,10 @@ class Game:
 
     def isHeadOnTail(self):
         return self.snake.isPartOfTail( self.snake.getHeadPos()[0], self.snake.getHeadPos()[1])
+
+    def generateTextSurface(self, text, size):
+        myfont = pygame.font.SysFont('Comic Sans MS', size)
+        return myfont.render(text, False, (255, 255, 255))
     
     def update(self):
         self.snake.move()
@@ -119,6 +124,17 @@ class Game:
         if self.isHeadOnTail():
             self.drawField()
         print("GAME OVER")
+        print( "SCORE: ", self.score)
+
+        self.screen.blit(self.generateTextSurface( 'GAME OVER' , 60 ) ,(550,200))
+        self.screen.blit(self.generateTextSurface( 'SCORE: ' + str(self.score) , 60 ) ,(550,340))
+        pygame.display.update()
+
+        while(True):
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    sys.exit()
+
 
 class SnakeElement:
     def __init__(self, element_x, element_y, isHead, number):
